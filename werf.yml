@@ -13,10 +13,19 @@ git:
       - tsconfig*.json
     excludePaths:
       - '**/*spec.ts'
+    stageDependencies:
+      install:
+        - package.json
+        - yarn.lock
+      setup:
+        - src/**/*.ts
+        - tsconfig*.json
 ansible:
   install:
     - name: Install dependencies
-      shell: yarn install --frozen-lockfile --cache-folder /root/.yarn-cache
+      shell: yarn install
+        --frozen-lockfile
+        --cache-folder /root/.yarn-cache
       args:
         chdir: /app
   setup:
@@ -44,7 +53,10 @@ import:
 ansible:
   install:
     - name: Install dependencies
-      shell: yarn install --production --frozen-lockfile --cache-folder /root/.yarn-cache
+      shell: yarn install
+        --frozen-lockfile
+        --cache-folder /root/.yarn-cache
+        --production
       args:
         chdir: /app
 mount:
