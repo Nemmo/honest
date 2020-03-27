@@ -1,0 +1,56 @@
+project: honest
+configVersion: 1
+---
+artifact: app-builder
+from: node:lts
+git:
+  - add: /
+    to: /app
+    includePaths:
+      - package.json
+      - yarn.lock
+      - src/**/*.ts
+      - tsconfig*.json
+    excludePaths:
+      - '**/*spec.ts'
+ansible:
+  install:
+    - name: Install dependencies
+      shell: yarn install --frozen-lockfile --cache-folder /root/.yarn-cache
+      args:
+        chdir: /app
+  setup:
+    - name: Compile TypeScript
+      shell: yarn build
+      args:
+        chdir: /app
+mount:
+  - from: build_dir
+    to: /root/.yarn-cache
+---
+image: app
+from: node:lts-alpine
+git:
+  - add: /
+    to: /app
+    includePaths:
+      - package.json
+      - yarn.lock
+import:
+  - artifact: app-builder
+    after: install
+    add: /app/dist
+    to: /app/dist
+ansible:
+  install:
+    - name: Install dependencies
+      shell: yarn install --production --frozen-lockfile --cache-folder /root/.yarn-cache
+      args:
+        chdir: /app
+mount:
+  - from: build_dir
+    to: /root/.yarn-cache
+docker:
+  WORKDIR: /app
+  EXPOSE: '3000'
+  CMD: ['yarn', 'start:prod']
