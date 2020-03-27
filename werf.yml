@@ -37,6 +37,34 @@ mount:
   - from: build_dir
     to: /root/.yarn-cache
 ---
+image: app-test
+from: node:lts
+git:
+  - add: /
+    to: /app
+    includePaths:
+      - '**/*.ts'
+      - '**/*.json'
+      - yarn.lock
+    stageDependencies:
+      install:
+        - package.json
+        - yarn.lock
+ansible:
+  install:
+    - name: Install dependencies
+      shell: yarn install
+        --frozen-lockfile
+        --cache-folder /root/.yarn-cache
+      args:
+        chdir: /app
+mount:
+  - from: build_dir
+    to: /root/.yarn-cache
+docker:
+  WORKDIR: /app
+  CMD: ['yarn', 'test']
+---
 image: app
 from: node:lts-alpine
 git:
