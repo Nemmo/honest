@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
-import { registerAs } from '@nestjs/config';
+import { ConfigType , registerAs } from '@nestjs/config';
+
 import * as Joi from '@hapi/joi';
 
 export const envConfig = registerAs('env', () => ({

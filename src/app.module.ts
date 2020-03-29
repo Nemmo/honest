@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
+import AppController from 'src/app.controller';
+import AppService from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
 import {
   envConfig,
@@ -18,4 +18,4 @@ import {
   controllers: [AppController],
   providers: [AppService, EnvConfigService],
 })
-export class AppModule {}
+export default class AppModule {}
