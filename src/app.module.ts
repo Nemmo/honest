@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from 'src/app.controller';
+import { AppService } from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
 import {
   envConfig,
   EnvConfigService,
   envConfigValidationSchema,
-} from './env-config.service';
+} from 'src/env-config.service';
 
 @Module({
   imports: [
