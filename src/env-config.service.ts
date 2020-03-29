@@ -1,7 +1,6 @@
+import * as Joi from '@hapi/joi';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType , registerAs } from '@nestjs/config';
-
-import * as Joi from '@hapi/joi';
 
 export const envConfig = registerAs('env', () => ({
   port: Number(process.env.PORT),
