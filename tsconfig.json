@@ -12,8 +12,8 @@
     "paths": {
       "src/*": ["src/*"]
     },
-    "incremental": true
+    "incremental": true,
+    "esModuleInterop": true
   },
-  "exclude": ["node_modules", "dist"],
-  "esModuleInterop": true
+  "exclude": ["node_modules", "dist"]
 }
