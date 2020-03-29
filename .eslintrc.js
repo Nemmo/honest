@@ -4,10 +4,11 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import-helpers'],
+  plugins: ['@typescript-eslint', 'import-helpers', 'security'],
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:security/recommended',
     'airbnb-typescript/base',
     'prettier',
     'prettier/@typescript-eslint',
