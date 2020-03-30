@@ -4,7 +4,7 @@ import { ConfigModule as NestJSConfigModule } from '@nestjs/config';
 import ConfigService, {
   appConfig,
   configValidationSchema,
-} from 'src/config/config.service';
+} from './config.service';
 
 @Global()
 @Module({

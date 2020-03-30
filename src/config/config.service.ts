@@ -2,7 +2,7 @@ import Joi from '@hapi/joi';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType, registerAs } from '@nestjs/config';
 
-import { KnexOptions, KnexOptionsFactory } from 'src/modules/knex';
+import { KnexOptions, KnexOptionsFactory } from 'src/knex';
 
 export const appConfig = registerAs('app', () => ({
   port: Number(process.env.PORT),

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import ConfigService from 'src/config/config.service';
-import { KNEX_CONNECTION } from 'src/modules/knex';
+import { KNEX_CONNECTION } from 'src/knex';
 
 @Injectable()
 export default class AppService {

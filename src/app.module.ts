@@ -4,7 +4,7 @@ import AppController from 'src/app.controller';
 import AppService from 'src/app.service';
 import ConfigModule from 'src/config/config.module';
 import ConfigService from 'src/config/config.service';
-import KnexModule from 'src/modules/knex';
+import KnexModule from 'src/knex';
 
 @Module({
   imports: [
