@@ -10,4 +10,9 @@ export default class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/db')
+  getNowFromDB(): Promise<string> {
+    return this.appService.getNowFromDB();
+  }
 }

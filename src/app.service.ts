@@ -1,14 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
-import { EnvConfigService } from 'src/env-config.service';
+import ConfigService from 'src/config/config.service';
+import { KNEX_CONNECTION } from 'src/modules/knex';
 
 @Injectable()
 export default class AppService {
-  constructor(private readonly envConfigService: EnvConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    @Inject(KNEX_CONNECTION) private readonly knex,
+  ) {}
 
   getHello(): string {
-    return `${
-      this.envConfigService.get.hello.greeting
-    } from ${this.envConfigService.get.hello.birthday.toString()}!`;
+    return `${this.configService.get.hello.greeting}!`;
+  }
+
+  async getNowFromDB(): Promise<string> {
+    const { rows } = await this.knex.raw('SELECT now();');
+
+    return rows[0].now;
   }
 }

@@ -1,22 +1,19 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 
 import AppController from 'src/app.controller';
 import AppService from 'src/app.service';
-import {
-  envConfig,
-  EnvConfigService,
-  envConfigValidationSchema,
-} from 'src/env-config.service';
+import ConfigModule from 'src/config/config.module';
+import ConfigService from 'src/config/config.service';
+import KnexModule from 'src/modules/knex';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [envConfig],
-      validationSchema: envConfigValidationSchema,
+    ConfigModule,
+    KnexModule.registerAsync({
+      useExisting: ConfigService,
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, EnvConfigService],
+  providers: [AppService],
 })
 export default class AppModule {}
